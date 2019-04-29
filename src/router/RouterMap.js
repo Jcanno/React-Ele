@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as Loadable from 'react-loadable'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Loading from './Loading'
-import App from '../components/App/App'
+import App from '../containers/App'
 
 const RouterList = [
   {
