@@ -13,6 +13,19 @@ const RouterList = [
     component: () => import('../components/Order/Order'),
     path: '/myorder'
   },
+  {
+    component: () => import('../components/My/My'),
+    path: '/my'
+  },
+  {
+    component: () => import('../components/Login/Login'),
+    path: '/login'
+  },
+  {
+    component: () => import('../components/Address/Address'),
+    path: '/address'
+  },
+
 ]
 
 const RouterMap = () => (

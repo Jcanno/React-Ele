@@ -6,7 +6,7 @@ import './App.less';
 class App extends React.Component{
   render() {
     const { Content } = Layout;
-    const { children, } = this.props
+    const { children } = this.props;
 
     return (
       <Layout className="layout">
