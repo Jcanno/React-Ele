@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Dropdown, Icon, Button, Divider } from 'antd'
+import { Layout, Menu, Dropdown, Icon, Button } from 'antd'
 import logo from '@/assets/ele.png'
 import { Link } from 'react-router-dom'
 import './Header.less'
