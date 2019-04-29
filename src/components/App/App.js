@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Layout, Menu, BackTop, Divider, Col, Row } from 'antd'
 import logo from '../../assets/ele.png'
+import { Link } from 'react-router-dom'
 import './App.less';
 class App extends React.Component{
   render() {
@@ -22,8 +23,16 @@ class App extends React.Component{
             className="menu"
             defaultSelectedKeys={["1"]}
           > 
-            <Menu.Item key="1">首页</Menu.Item>
-            <Menu.Item key="2">我的订单</Menu.Item>
+            <Menu.Item key="1">
+              <Link to="/">
+                首页
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/myorder">
+                我的订单
+              </Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content className="content">

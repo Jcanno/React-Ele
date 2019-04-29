@@ -8,7 +8,11 @@ const RouterList = [
   {
     component: () => import('../components/Home/Home'),
     path: '/'
-  }
+  },
+  {
+    component: () => import('../components/Order/Order'),
+    path: '/myorder'
+  },
 ]
 
 const RouterMap = () => (
