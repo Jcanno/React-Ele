@@ -1,27 +1,56 @@
+@marginNum: 10px;
+
 .store-item {
   padding: 20px;
+  cursor: pointer;
 
   .store-avatar {
     display: block;
-    margin-bottom: 10px;
-    width: 100px;
-    height: 100px;
+    margin: 0 auto @marginNum;
   }
 
   .store-time {
     display: block;
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .store-fee {
     display: block;
+    margin-top: @marginNum;
     font-size: 10px;
+  }
+
+  .store-name {
+    display: block;
+    font-weight: bold;
+    color: black;
+    font-size: 18px;
   }
 
   .store-rate {
     width: 100%;
     font-size: 1px;
-    letter-spacing: 1rem;
+    cursor: pointer;
+  }
+
+  .ant-rate-star {
+    margin-right: 1px;
   }
 }
+
+.store-item:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.store-item:hover .store-name{
+  color: rgb(0, 132, 223)
+}
+
+.content-name {
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+    color: black;
+    font-size: 18px;
+  }

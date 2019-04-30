@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Row, Col, Card } from 'antd'
+import { List, Row, Col } from 'antd'
 import StoreItem from '../StoreItem/StroeItem'
 import './Home.less'
 
@@ -7,54 +7,37 @@ import './Home.less'
 export default class Home extends Component {
   render() {
 
+    const storeGird = {
+      xs: {span: 12},
+      sm: {span: 12},
+      md: {span: 8},
+      lg: {span: 6}
+    }
 
     return (
       <div >
-        <List className="store-list">
-          <Row>
-            <Col span={6}>
-              <StoreItem />
-            </Col>
-            <Col span={6}>
-              <StoreItem />
-            </Col>
-            <Col span={6}>
-              <StoreItem />
-            </Col>
-
-            <Col span={6}>
-              <StoreItem />
-            </Col>
-            <Col span={6}>
-              <StoreItem />
-            </Col>
-          </Row>
-
-        </List>
-
-        {/* <Card
-          bordered={false}
+        <List 
           className="store-list"
-          bodyStyle={bodyStyle}
+          bordered
         >
           <Row>
-            <Col span={6}>
+            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
               <StoreItem />
             </Col>
-            <Col span={6}>
+            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
               <StoreItem />
             </Col>
-            <Col span={6}>
+            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
               <StoreItem />
             </Col>
-            <Col span={6}>
+            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
               <StoreItem />
             </Col>
-            <Col span={6}>
+            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
               <StoreItem />
             </Col>
           </Row>
-        </Card> */}
+        </List>
       </div>
     )
   }
