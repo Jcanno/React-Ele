@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout, BackTop, Col, Row } from 'antd'
+import { Layout, BackTop } from 'antd'
 import Header from '../Layout/Header/Header'
 import Footer from '../Layout/Footer/Footer'
 import './App.less';

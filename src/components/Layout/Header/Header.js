@@ -54,7 +54,7 @@ export default class HeaderDom extends Component {
             </Menu.Item>
           </Menu>
           <Dropdown overlay={menu}>
-            <Button ghost className="dp-btn">下拉<Icon type="down" /></Button>
+            <Button ghost className="dp-btn">更多<Icon type="down" /></Button>
           </Dropdown>
         </Header>
       </div>
