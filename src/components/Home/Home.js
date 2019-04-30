@@ -1,24 +1,42 @@
 import React, { Component } from 'react'
 import { List, Row, Col, Card } from 'antd'
 import StoreItem from '../StoreItem/StroeItem'
+import './Home.less'
+
 
 export default class Home extends Component {
   render() {
 
-    const gridStyle = {
-      width: '25%',
-      boder: 0
-    };
 
     return (
       <div >
-        <Card
+        <List className="store-list">
+          <Row>
+            <Col span={6}>
+              <StoreItem />
+            </Col>
+            <Col span={6}>
+              <StoreItem />
+            </Col>
+            <Col span={6}>
+              <StoreItem />
+            </Col>
+
+            <Col span={6}>
+              <StoreItem />
+            </Col>
+            <Col span={6}>
+              <StoreItem />
+            </Col>
+          </Row>
+
+        </List>
+
+        {/* <Card
           bordered={false}
-          bodyStyle={{'padding': '-24'}}
+          className="store-list"
+          bodyStyle={bodyStyle}
         >
-          {/* <Card.Grid style={gridStyle}>
-            <StoreItem />
-          </Card.Grid> */}
           <Row>
             <Col span={6}>
               <StoreItem />
@@ -36,7 +54,7 @@ export default class Home extends Component {
               <StoreItem />
             </Col>
           </Row>
-        </Card>
+        </Card> */}
       </div>
     )
   }
