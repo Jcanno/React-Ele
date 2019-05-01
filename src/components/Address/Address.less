@@ -1,0 +1,72 @@
+.address {
+  display: flex;
+
+  &-card {
+    width: 100%;
+
+    .address-item {
+      display: inline-block;
+      width: 100%;
+      height: 120px;
+
+      .ant-card-body {
+        padding: 15px;
+      }
+
+      p span {
+        display: inline-block;
+      }
+
+      .address-name {
+        color: black;
+        margin-right: 10px;
+      }
+
+      .address-sex {
+        color: black;
+      }
+
+      .address-operate {
+        float: right;
+        color: rgb(190, 190, 190);
+
+        .address-edit {
+          margin-right: 10px;
+        }
+
+        span {
+          cursor: pointer;
+        }
+      }
+
+      .address-place {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .address-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgb(252, 252, 252);
+    width: 100%;
+    height: 120px;
+  }
+}
+
+.address-add:hover {
+  color: rgb(0, 112, 212);
+  border-color: rgb(0, 112, 212);
+}
+
+.address-item:hover  .address-operate {
+  color: rgb(0, 112, 212);
+}
+.address-item:hover {
+  border-color: rgb(0, 112, 212);
+}

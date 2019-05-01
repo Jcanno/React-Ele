@@ -9,7 +9,7 @@ class App extends React.Component{
   render() {
     const { Content } = Layout;
     const { children } = this.props;
-    const isLogin = false;
+    const isLogin = true;
 
     return isLogin ? (
       <Layout className="layout">
