@@ -6,7 +6,7 @@ import './StoreItem.less'
 export default class StroeItem extends Component {
   render() {
 
-    const { Text, Title, Paragraph } = Typography;
+    const { Text, Paragraph } = Typography;
     const content = (
       <div>
         <Text 
