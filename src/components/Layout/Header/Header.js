@@ -25,6 +25,11 @@ export default class HeaderDom extends Component {
             退出登录
           </Link>
         </Menu.Item>
+        <Menu.Item>
+          <Link to="/store">
+            商品详情
+          </Link>
+        </Menu.Item>
       </Menu>
     );
 
