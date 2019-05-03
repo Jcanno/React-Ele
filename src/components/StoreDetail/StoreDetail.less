@@ -1,5 +1,4 @@
 .detail-header {
-  // display: table;
   display: flex;
   align-items: center;
   width: 100%;
@@ -7,17 +6,12 @@
 
   .detail-intro {
     display: inline-flex;
-    // flex-direction: column;
     justify-content: flex-start;
     align-content: center;
     width: 50%;
   }
   
-  .detail-avatar {
-    display: block;
-    margin: auto 20px auto 0;
-    // margin-right: 20px;
-  }
+  
 
   .detail-box {
     display: inline-flex;
@@ -61,8 +55,58 @@
   .datail-rate {
 
   }
+
+  span {
+    display: block;
+    margin-bottom: 20px;
+  }
 }
-span {
+
+.detail-goods {
+  margin-top: 50px;
+  width: 100%;
+
+  .detail-item {
+    display: flex;
+    margin-top: 15px;
+  }
+ 
+  .detail-goodbox {
+    width: calc(100% - 120px);
+
+    .detail-goodname {
+      font-weight: bold;
+      color: black;
+    }
+    
+    .detail-gooddesc {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
+    .detail-goodrate {
+      font-size: 2px;
+      cursor: pointer;
+    }
+  
+    .ant-rate-star {
+      margin-right: 1px;
+    }
+
+    .detail-goodprice {
+      display: block;
+      color: rgb(255, 0, 35);
+      font-weight: bold;
+    }
+  }
+}
+
+.detail-avatar {
   display: block;
-  margin-bottom: 20px;
+  margin: auto 20px auto 0;
 }
+
+
+
