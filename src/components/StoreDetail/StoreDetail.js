@@ -4,6 +4,41 @@ import { Avatar, Typography, Rate, Row, Col, Button, Icon } from 'antd'
 import store from '@/assets/store.jpg'
 
 export default class StoreDetail extends Component {
+
+  state = {
+   style: {} 
+  }
+
+  openBarket = () => {
+    let e = document.getElementsByClassName('shop-cartbarket')[0];
+    var style = getComputedStyle(e, null);
+    console.log(style.top);
+    
+    if(style.top === '0px'){
+      this.setState({
+        style: {
+          top: '-208px'
+        }
+      })
+    }else{
+      this.setState({
+        style: {
+          top: '0px'
+        }
+      })
+    }
+  }
+
+  addShop = () => {
+    let top = parseInt(this.state.style.top) - 46;
+    
+    this.setState({
+      style: {
+        top: `${top}px`
+      }
+    })
+  }
+
   render() {
 
     const { Title, Text } = Typography;
@@ -76,7 +111,7 @@ export default class StoreDetail extends Component {
                   </Text>
                   <Text className="detail-goodprice">
                     ￥66
-                    <Button type="primary" shape="round" size="small" style={{float: "right"}}>
+                    <Button onClick={this.addShop} type="primary" shape="round" size="small" style={{float: "right"}}>
                       加入购物车
                     </Button>
                   </Text>
@@ -184,12 +219,42 @@ export default class StoreDetail extends Component {
                     <Button type="primary" shape="round" size="small" style={{float: "right"}}>
                       加入购物车
                     </Button>
-                  </Text>
-                  
+                  </Text>                 
                 </div>
               </div>
             </Col>
           </Row>
+        </div>
+
+        <div className="shop-cart">
+          
+          <div className="shop-cartfooter" onClick={this.openBarket}>
+            <Icon 
+              type="shopping-cart"
+              size={40}
+              style={{color: 'white',fontSize: '30px'}}
+            />
+            <span className="shop-cartfooter-text">
+              配送费￥1
+            </span>
+            <Button className="shop-cartfooter-checkout">
+              购物车是空的
+            </Button>
+          </div>
+          <div className="shop-cartbarket" style={this.state.style}>
+            <div className="shop-cartbarket-header">
+              <span>购物车</span>
+              <span className="shop-cartbarket-clear">[清空]</span>
+            </div>
+            <div className="shop-cartbarket-empty">
+              <Icon 
+                type="shopping-cart"
+                size={50}
+                style={{fontSize: '50px'}}
+              />
+              <p>购物车是空的，赶紧选购吧</p>
+            </div>
+          </div>
         </div>
       </div>
     )
