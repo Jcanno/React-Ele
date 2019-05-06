@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import './OrderDetail.less'
-import { Steps, Icon, Row, Col, Card, Table, InputNumber, Button  } from 'antd';
-
-
-
+import { Steps, Icon, Row, Col, Card, Table, InputNumber, } from 'antd';
 
 export default class OrderDetail extends Component {
 
@@ -99,7 +96,6 @@ export default class OrderDetail extends Component {
             </Card>
           </Col>
         </Row>
-
       </div>
     )
   }
