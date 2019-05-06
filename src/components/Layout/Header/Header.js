@@ -30,6 +30,11 @@ export default class HeaderDom extends Component {
             商品详情
           </Link>
         </Menu.Item>
+        <Menu.Item>
+          <Link to="/orderdetail">
+            订单详情
+          </Link>
+        </Menu.Item>
       </Menu>
     );
 
