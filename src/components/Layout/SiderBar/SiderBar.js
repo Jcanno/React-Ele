@@ -2,24 +2,41 @@ import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
 import './SiderBar.less'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
-export default class SiderBar extends Component {
+class SiderBar extends Component {
+
+  state = {
+    current: ""
+  }
+
+  componentDidMount() {
+    this.setState({
+      current: this.props.location.pathname
+    })
+    console.log(this.props.location.pathname);
+    
+  }
+
   render() {
     return (
       <div>
-        <Menu className="siderbar">
-          <Menu.Item>
+        <Menu 
+          className="siderbar"
+          selectedKeys={[this.state.current]}
+        >
+          <Menu.Item key="/address">
             <div>
               <Icon type="user" className="siderbar-icon"/>
-              <Link to="/my">
+              <Link to="/address">
                 我的资料
               </Link>
             </div>           
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item key="/myorder">
             <div>
               <Icon type="file-text" className="siderbar-icon"/>
-              <Link to="/my">
+              <Link to="/myorder">
                 我的订单
               </Link>
             </div>  
@@ -31,3 +48,5 @@ export default class SiderBar extends Component {
     )
   }
 }
+
+export default withRouter(SiderBar)
