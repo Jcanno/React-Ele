@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './OrderDetail.less'
-import { Steps, Icon, Row, Col, Card, Table, InputNumber  } from 'antd';
+import { Steps, Icon, Row, Col, Card, Table, InputNumber, Button  } from 'antd';
 
 
 
@@ -41,7 +41,7 @@ export default class OrderDetail extends Component {
           <Step title="确认订单信息" />
           <Step title="成功提交订单"  />
         </Steps>
-        <Row>
+        <Row gutter={15}>
           <Col span={8}>
             <Card
               title="订单详情"
@@ -77,7 +77,26 @@ export default class OrderDetail extends Component {
               </p>
               <p className="order-total-goods">共2份商品</p>
             </Card>
-            
+          </Col>
+          <Col span={16}>
+            <Card
+              title="收货地址"
+              style={{ width: '100%' }}
+            >
+              <div tabIndex="1" className="address-box">
+                <Icon 
+                  type="environment"
+                  className="address-img"
+                />
+                <div className="address-info">
+                  <span className="address-name">金</span>
+                  <span className="address-name">先生</span>
+                  <span>13888888888</span>
+                  <span className="address">杭州市西湖区XXXXX幢XXX室</span>
+                </div>
+              </div>
+              <button className="check-order">确认下单</button>
+            </Card>
           </Col>
         </Row>
 
