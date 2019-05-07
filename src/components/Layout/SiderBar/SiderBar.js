@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
 import './SiderBar.less'
-import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom'
 
 class SiderBar extends Component {
 
