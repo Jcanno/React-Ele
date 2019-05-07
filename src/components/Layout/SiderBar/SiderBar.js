@@ -14,8 +14,6 @@ class SiderBar extends Component {
     this.setState({
       current: this.props.location.pathname
     })
-    console.log(this.props.location.pathname);
-    
   }
 
   render() {
@@ -41,8 +39,6 @@ class SiderBar extends Component {
               </Link>
             </div>  
           </Menu.Item>
-          <Menu.Item>菜单项</Menu.Item>
-          <Menu.Item>菜单项</Menu.Item>
         </Menu>
       </div>
     )
