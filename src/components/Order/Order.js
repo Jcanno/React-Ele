@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SiderBar from '../Layout/SiderBar/SiderBar'
-import { Card, Table, Avatar, Timeline, Tag, Popover, Divider, Rate, Row, Col, Typography } from 'antd'
+import { Card, Table, Avatar } from 'antd'
 import './Order.less'
 import store from '@/assets/store.jpg'
 
@@ -9,7 +9,7 @@ export default class Order extends Component {
 
   render() {
 
-    const { Column, ColumnGroup } = Table;
+    const { Column } = Table;
 
     const data = [{
       key: '1',

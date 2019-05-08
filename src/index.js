@@ -8,6 +8,7 @@ import { applyMiddleware, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import RouterMap from './router/RouterMap'
 import * as serviceWorker from './serviceWorker';
+import './mock'
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));

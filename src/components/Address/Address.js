@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import SiderBar from '../Layout/SiderBar/SiderBar'
 import './Address.less'
 import { Card, Row, Col, Icon, Modal, Form, Input, Radio } from 'antd';
+import { login } from '@/api'
+
 
 export default class Address extends Component {
 
@@ -12,6 +14,13 @@ export default class Address extends Component {
   onEdit = () => {
     this.setState({
       visible: true,
+    })
+  }
+
+  handleAdd = () => {
+    login().then(res => {
+      console.log(res);
+      
     })
   }
 
@@ -77,7 +86,7 @@ export default class Address extends Component {
               </Card>
             </Col>
             <Col xs={12} sm={12} md={12} lg={8}>
-              <Card className="address-add">
+              <Card className="address-add" onClick={this.handleAdd}>
                 <Icon type="plus" />
                 添加新地址
               </Card>
