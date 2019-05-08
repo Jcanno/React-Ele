@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
 import Login from '@/components/Login/Login'
-import { REQUEST_LOGIN } from '../constants'
-
+import { LoginAction } from '../actions'
 
 const mapStateToProps = (state) => {
-  return {  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (data) => {
+    postLogin: (data, callback) => {
       dispatch(
-        { type: REQUEST_LOGIN, payload: data }
+        LoginAction(data, callback)
       )
     } 
   }

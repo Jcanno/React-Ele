@@ -2,8 +2,10 @@ import App from '@/components/App/App'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = (state) => {
+  return {
+    login: state.login
+  }
 }
 
 export const mapDispatchToProps = (dispatch) => {

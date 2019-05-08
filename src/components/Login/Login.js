@@ -80,7 +80,7 @@ class Login extends Component {
         />
         <WrappedNormalLoginForm 
           className="login-form"
-          onData={(data) => this.props.login(data)}
+          onData={(data) =>  this.props.postLogin(data, () => this.props.history.push('/'))}
         />
       </div>
     )

@@ -4,6 +4,11 @@ import { Steps, Icon, Row, Col, Card, Table, InputNumber, } from 'antd';
 
 export default class OrderDetail extends Component {
 
+  onConfirm = () => {
+    console.log(this.props.login);
+    
+  }
+
   render() {
 
 
@@ -92,7 +97,7 @@ export default class OrderDetail extends Component {
                   <span className="address">杭州市西湖区XXXXX幢XXX室</span>
                 </div>
               </div>
-              <button className="check-order">确认下单</button>
+              <button className="check-order" onClick={this.onConfirm}>确认下单</button>
             </Card>
           </Col>
         </Row>

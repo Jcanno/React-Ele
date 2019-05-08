@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Layout, BackTop } from 'antd'
-import Login from '../Login/Login'
+import Login from '@/containers/Login'
 import Header from '../Layout/Header/Header'
 import Footer from '../Layout/Footer/Footer'
 import './App.less';
@@ -9,9 +9,9 @@ class App extends React.Component{
   render() {
     const { Content } = Layout;
     const { children } = this.props;
-    const isLogin = true;
+    const token = this.props.login.token;
 
-    return isLogin ? (
+    return token ? (
       <Layout className="layout">
         <BackTop />
         <Header />

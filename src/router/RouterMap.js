@@ -30,7 +30,7 @@ const RouterList = [
     path: '/store'
   },
   {
-    component: () => import('../components/OrderDetail/OrderDetail'),
+    component: () => import('../containers/OrderDetail'),
     path: '/orderdetail'
   },
 
