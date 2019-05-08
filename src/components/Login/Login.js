@@ -7,6 +7,7 @@ import {
   Input, 
   Button, 
 } from 'antd';
+import { withRouter } from 'react-router-dom'
 
 
 class LoginForm extends React.Component {
@@ -14,7 +15,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.onData(values);
       }
     });
   }
@@ -62,7 +63,13 @@ class LoginForm extends React.Component {
 
 const WrappedNormalLoginForm = Form.create({ name: 'login' })(LoginForm);
 
-export default class Login extends Component {
+class Login extends Component {
+
+  componentDidMount() {
+    
+    
+  }
+
   render() {
     return (
       <div className="login">
@@ -71,8 +78,13 @@ export default class Login extends Component {
           alt="暂无图片"
           className="login-img"
         />
-        <WrappedNormalLoginForm className="login-form"/>
+        <WrappedNormalLoginForm 
+          className="login-form"
+          onData={(data) => this.props.login(data)}
+        />
       </div>
     )
   }
 }
+
+export default withRouter(Login);

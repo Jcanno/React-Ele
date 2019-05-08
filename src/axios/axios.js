@@ -37,7 +37,7 @@ class HttpRequest {
       if (res.status !== 200 && res.status !== 201 && res.status !== 202 && res.status !== 204) {
 
       }
-      return Promise.resolve(res)
+      return Promise.resolve(res.data)
     },error => {
       // if (error.response.status === 401) {
       //   Cookies.remove(TOKEN_KEY);

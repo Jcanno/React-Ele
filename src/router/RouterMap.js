@@ -18,7 +18,7 @@ const RouterList = [
     path: '/my'
   },
   {
-    component: () => import('../components/Login/Login'),
+    component: () => import('../containers/Login'),
     path: '/login'
   },
   {
