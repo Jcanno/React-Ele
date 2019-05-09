@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Layout, BackTop } from 'antd'
 import Login from '@/containers/Login'
-import Header from '../Layout/Header/Header'
+import Header from '@/containers/Header'
 import Footer from '../Layout/Footer/Footer'
 import './App.less';
 

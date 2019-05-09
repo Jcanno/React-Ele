@@ -1,14 +1,10 @@
-import App from '@/components/App/App'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { DeleteLoginAction } from '@/actions'
+import Header from '@/components/Layout/Header/Header'
+import { DeleteLoginAction } from '../actions'
 
 const mapStateToProps = (state) => {
-  return {
-    login: state.login
-  }
+  return {}
 }
-
 export const mapDispatchToProps = (dispatch) => {
   return {
     deleteLogin: (callback) => {
@@ -17,9 +13,7 @@ export const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-const AppMap = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
-export default withRouter(AppMap)
+)(Header)

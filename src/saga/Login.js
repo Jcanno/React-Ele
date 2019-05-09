@@ -1,4 +1,4 @@
-import { call, takeEvery, put } from 'redux-saga/effects'
+import { call, put, all, takeLatest } from 'redux-saga/effects'
 import { REQUEST_LOGIN, RECEIVE_TOKEN } from '../constants'
 import { login } from '@/api'
 
@@ -10,7 +10,8 @@ function* yieldLogin(action) {
     yield put({ type: RECEIVE_TOKEN, payload: res.token });
   }
 }
-
 export function* watchYieldLogin() {
-  yield takeEvery(REQUEST_LOGIN, yieldLogin)
+  yield all([
+    yield takeLatest(REQUEST_LOGIN, yieldLogin)
+  ])
 }

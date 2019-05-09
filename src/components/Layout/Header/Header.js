@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Dropdown, Icon, Button } from 'antd'
 import logo from '@/assets/ele.png'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, } from 'react-router-dom'
 import './Header.less'
 
-export default class HeaderDom extends Component {
+class HeaderDom extends Component {
   render() {
 
     const { Header } = Layout;
@@ -21,9 +21,9 @@ export default class HeaderDom extends Component {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="/login">
+          <span onClick={() => this.props.deleteLogin(() => this.props.history.push('/login'))}>
             退出登录
-          </Link>
+          </span>
         </Menu.Item>
         <Menu.Item>
           <Link to="/store">
@@ -31,7 +31,7 @@ export default class HeaderDom extends Component {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="/orderdetail">
+          <Link to='/storedetail'>
             订单详情
           </Link>
         </Menu.Item>
@@ -71,3 +71,5 @@ export default class HeaderDom extends Component {
     )
   }
 }
+
+export default withRouter(HeaderDom)

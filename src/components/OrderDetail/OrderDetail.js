@@ -5,7 +5,6 @@ import { Steps, Icon, Row, Col, Card, Table, InputNumber, } from 'antd';
 export default class OrderDetail extends Component {
 
   onConfirm = () => {
-    console.log(this.props.login);
     
   }
 

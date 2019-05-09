@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <Form.Item>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [{ required: true, message: '用户名' }],
           })(
             <Input 
@@ -80,7 +80,7 @@ class Login extends Component {
         />
         <WrappedNormalLoginForm 
           className="login-form"
-          onData={(data) =>  this.props.postLogin(data, () => this.props.history.push('/'))}
+          onData={(data) => this.props.postLogin(data, () => this.props.history.push('/'))}
         />
       </div>
     )

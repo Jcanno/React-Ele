@@ -12,8 +12,6 @@ export default class StoreDetail extends Component {
   openBarket = () => {
     let e = document.getElementsByClassName('shop-cartbarket')[0];
     var style = getComputedStyle(e, null);
-    console.log(style.top);
-    
     if(style.top === '0px'){
       this.setState({
         style: {
