@@ -22,7 +22,7 @@ const RouterList = [
     path: '/login'
   },
   {
-    component: () => import('../components/Address/Address'),
+    component: () => import('../containers/Address'),
     path: '/address'
   },
   {

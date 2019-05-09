@@ -115,6 +115,7 @@ Mock.mock(`${baseUrl}stores`, (options) => {
   let res = [];
   for(let i = 0;i < 9;i++) {
     let obj = {
+      id: i + 1,
       storename: storenames[i],
       storeimg: storeimgs[i],
       storerate: Random.storerate(),
@@ -126,4 +127,32 @@ Mock.mock(`${baseUrl}stores`, (options) => {
     res.push(obj);
   }
   return res
+})
+
+
+const addresses = [];
+let addid = 0;
+
+/**
+ * 获取地址
+ */
+Mock.mock(`${baseUrl}addresses`, (options) => {
+  return addresses
+})
+
+/**
+ * 添加地址
+ */
+Mock.mock(`${baseUrl}address`, 'post', (options) => {
+  const address = JSON.parse(options.body);
+  address.id = addid + 1;
+  addresses.push(address);
+})
+
+/**
+ * 删除地址
+ */
+Mock.mock(`${baseUrl}address`, (options) => {
+  const address = JSON.parse(options.body);
+  addresses.filter(item => item.id !== address.id)
 })

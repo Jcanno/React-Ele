@@ -2,13 +2,21 @@ import React, { Component } from 'react'
 import SiderBar from '../Layout/SiderBar/SiderBar'
 import './Address.less'
 import { Card, Row, Col, Icon, Modal, Form, Input, Radio } from 'antd';
-import { login } from '@/api'
 
 
 export default class Address extends Component {
 
   state = {
     visible: false
+  }
+
+  componentDidMount() {
+    console.log(this.props);
+    this.load();
+  }
+
+  load = () => {
+    this.props.getAddresses();
   }
 
   onEdit = () => {
@@ -18,13 +26,13 @@ export default class Address extends Component {
   }
 
   handleAdd = () => {
-    login().then(res => {
-      console.log(res);
-      
+    this.setState({
+      visible: true,
     })
   }
 
   handleCancel = () => {
+    this.formRef.props.form.resetFields();
     this.setState({ visible: false });
   }
 
@@ -34,8 +42,12 @@ export default class Address extends Component {
       if (err) {
         return;
       }
+
       form.resetFields();
-      this.setState({ visible: false });
+      this.props.postAddress(values);
+      this.setState({ visible: false }, () => {
+        this.load();
+      });
     });
   }
 
@@ -47,6 +59,8 @@ export default class Address extends Component {
 
 
   render() {
+
+    const { addresses } = this.props.address; 
     return (
       <div className="address">
         <SiderBar />
@@ -55,34 +69,37 @@ export default class Address extends Component {
           className="address-card"
         >
           <Row gutter={10}>
-            <Col xs={12} sm={12} md={12} lg={8}>
-              <Card className="address-item">
-                <div>
-                  <p>
-                    <span className="address-name">
-                      金
-                    </span>
-                    <span className="address-sex">
-                      先生
-                    </span>
-                    <span className="address-operate">
-                      <span className="address-edit" onClick={this.onEdit}>
-                        修改
+            {addresses.map(address => (
+              <Col key={address.id} xs={12} sm={12} md={12} lg={8}>
+                <Card className="address-item">
+                  <div>
+                    <p>
+                      <span className="address-name">
+                        {address.name}
                       </span>
-                      <span>
-                        删除
+                      <span className="address-sex">
+                        {address.sex}
                       </span>
+                      <span className="address-operate">
+                        <span className="address-edit" onClick={this.onEdit}>
+                          修改
+                        </span>
+                        <span>
+                          删除
+                        </span>
+                      </span>
+                    </p>
+                    <span className="address-place">
+                      {address.place}
                     </span>
-                  </p>
-                  <span className="address-place">
-                    杭州市西湖区中大银座A座2222室
-                  </span>
-                  <span className="address-phone">
-                    13888888888
-                  </span>
-                </div>
-              </Card>
-            </Col>
+                    <span className="address-phone">
+                      {address.phone}
+                    </span>
+                  </div>
+                </Card>
+              </Col>
+            ))}
+            
             <Col xs={12} sm={12} md={12} lg={8}>
               <Card className="address-add" onClick={this.handleAdd}>
                 <Icon type="plus" />
@@ -137,7 +154,7 @@ const AddOrEditAddressForm = Form.create({ name: 'form_in_modal' })(
               )}
             </Form.Item>
             <Form.Item label="详细位置">
-              {getFieldDecorator('address', {
+              {getFieldDecorator('place', {
                 rules: [{ required: true, message: '请输入详细位置!' }],
               })(<Input placeholder="详细位置" />)}
             </Form.Item>

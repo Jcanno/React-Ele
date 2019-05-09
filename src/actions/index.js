@@ -1,7 +1,10 @@
 import {
   REQUEST_LOGIN,
   DELETE_TOKEN,
-  GET_STORES
+  GET_STORES,
+  GET_ADDRESSES,
+  POST_ADDRESSES,
+  DELETE_ADDRESSES
 } from '../constants'
 
 
@@ -33,5 +36,34 @@ export const GetStoresAction = (callback) => {
   return {
     type: GET_STORES,
     onSuccess: callback
+  }
+}
+
+/**
+ * 获取地址action
+ */
+export const GetAddressesAction = () => {
+  return {
+    type: GET_ADDRESSES,
+  }
+}
+
+/**
+ * 添加地址action
+ */
+export const PostAddressesAction = (data) => {
+  return {
+    type: POST_ADDRESSES,
+    payload: data
+  }
+}
+
+/**
+ * 删除地址action
+ */
+export const DeleteAddressesAction = (id) => {
+  return {
+    type: DELETE_ADDRESSES,
+    payload: id
   }
 }
