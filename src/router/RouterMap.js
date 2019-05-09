@@ -6,7 +6,7 @@ import App from '../containers/App'
 
 const RouterList = [
   {
-    component: () => import('../components/Home/Home'),
+    component: () => import('../containers/Home'),
     path: '/'
   },
   {

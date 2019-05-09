@@ -10,3 +10,12 @@ export const login = (data) => {
     data
   })
 }
+
+/** 
+ * 获取商店
+*/
+export const stores = () => {
+  return axios.request({
+    url: `stores`
+  })
+}

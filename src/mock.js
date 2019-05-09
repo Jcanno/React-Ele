@@ -43,3 +43,12 @@ Mock.mock(`${baseUrl}login`, 'post', (options) => {
     }
   }
 })
+
+/**
+ * 获取商店接口
+ */
+Mock.mock(`${baseUrl}stores`, () => {
+  return {
+    aaa: 'ssss'
+  }
+})

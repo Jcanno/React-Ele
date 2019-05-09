@@ -5,6 +5,11 @@ import './Home.less'
 
 
 export default class Home extends Component {
+
+  componentDidMount() {
+    this.props.getStores();
+  }
+
   render() {
 
     const storeGird = {
