@@ -8,6 +8,8 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.props.getStores();
+    console.log(this.props);
+    
   }
 
   render() {
@@ -19,6 +21,9 @@ export default class Home extends Component {
       lg: {span: 6}
     }
 
+    const { stores } = this.props.home;
+
+    
     return (
       <div >
         <List 
@@ -26,21 +31,14 @@ export default class Home extends Component {
           bordered
         >
           <Row>
-            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
-              <StoreItem />
-            </Col>
-            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
-              <StoreItem />
-            </Col>
-            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
-              <StoreItem />
-            </Col>
-            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
-              <StoreItem />
-            </Col>
-            <Col xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
-              <StoreItem />
-            </Col>
+            {stores.map((store, index) => (
+              <Col key={index} xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
+                <StoreItem 
+                  store={store}
+                />
+              </Col>
+            ))
+            }
           </Row>
         </List>
       </div>

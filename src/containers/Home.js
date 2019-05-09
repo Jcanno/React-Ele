@@ -4,7 +4,7 @@ import { GetStoresAction } from '../actions'
 import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
-  return {}
+  return { home: state.home }
 }
 
 const mapDispatchToProps = (dispatch) => {

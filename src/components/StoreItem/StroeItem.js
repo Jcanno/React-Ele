@@ -1,24 +1,26 @@
 import React, { Component } from 'react'
 import { Popover, Divider, Avatar, Rate, Row, Col, Typography } from 'antd'
-import store from '@/assets/store.jpg'
+// import store from '@/assets/store.jpg'
 import './StoreItem.less'
 
 export default class StroeItem extends Component {
   render() {
 
     const { Text, Paragraph } = Typography;
+    const store = this.props.store;
+
     const content = (
       <div>
         <Text 
           className="content-name"
           ellipsis
         >
-          德克士(百里路店）
+          {store.storename}
         </Text>
-        <p>其他快餐</p>
+        <p>{store.storecal}</p>
         <Divider />
         <Paragraph style={{width: '250px'}}>
-          精致的炒饭外卖，精选周到的服务。为您提供美味的食物。享受最高级的待遇。精致的炒饭外卖，精选周到的服务。为您提供美味的食物。享受最高级的待遇。
+          {store.storeintro}
         </Paragraph>
       </div>
     )
@@ -32,11 +34,11 @@ export default class StroeItem extends Component {
               <Avatar
                 shape="square"
                 size={80}
-                src={store}
+                src={store.storeimg}
                 className="store-avatar"
               />
               <Text className="store-time">
-                28  分钟
+                {store.storetime}
               </Text>
             </Col>
             <Col span={14}>
@@ -44,16 +46,16 @@ export default class StroeItem extends Component {
                 className="store-name"
                 ellipsis
               >
-                德克士(百里路店）
+                {store.storename}
               </Text>
               <Rate
                 allowHalf
                 disabled
-                defaultValue={4.5}
+                defaultValue={store.storerate}
                 className="store-rate"
               />
               <Text className="store-fee">
-                配送费￥2
+                {store.storefee}
               </Text>
             </Col>
           </Row>
