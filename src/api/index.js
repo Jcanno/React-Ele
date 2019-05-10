@@ -41,6 +41,17 @@ export const postaddress = (data) => {
 }
 
 /** 
+ * 添加地址
+*/
+export const putaddress = (data) => {
+  return axios.request({
+    url: `address`,
+    data,
+    method: 'put'
+  })
+}
+
+/** 
  * 删除地址
 */
 export const deleteaddress = (data) => {

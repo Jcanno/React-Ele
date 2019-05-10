@@ -137,6 +137,8 @@ let addid = 0;
  * 获取地址
  */
 Mock.mock(`${baseUrl}addresses`, (options) => {
+  console.log(addresses);
+  
   return addresses
 })
 
@@ -145,8 +147,31 @@ Mock.mock(`${baseUrl}addresses`, (options) => {
  */
 Mock.mock(`${baseUrl}address`, 'post', (options) => {
   const address = JSON.parse(options.body);
-  address.id = addid + 1;
+  
+  
+  addid += 1;
+  address.id = addid;
+  console.log(address);
   addresses.push(address);
+})
+
+/**
+ * 修改地址
+ */
+Mock.mock(`${baseUrl}address`, 'put', (options) => {
+  let address = JSON.parse(options.body);
+  console.log(address);
+  
+  const id = address.id;
+  for(let i of addresses) {
+    console.log(i);
+    
+    if(i.id === id) {
+      i = Object.assign(i, address);
+    } 
+  }
+  console.log(addresses);
+  
 })
 
 /**

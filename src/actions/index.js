@@ -4,6 +4,7 @@ import {
   GET_STORES,
   GET_ADDRESSES,
   POST_ADDRESSES,
+  PUT_ADDRESSES,
   DELETE_ADDRESSES
 } from '../constants'
 
@@ -54,6 +55,16 @@ export const GetAddressesAction = () => {
 export const PostAddressesAction = (data) => {
   return {
     type: POST_ADDRESSES,
+    payload: data
+  }
+}
+
+/**
+ * 添加地址action
+ */
+export const PutAddressesAction = (data) => {
+  return {
+    type: PUT_ADDRESSES,
     payload: data
   }
 }

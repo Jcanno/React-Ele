@@ -7,11 +7,13 @@ import { Card, Row, Col, Icon, Modal, Form, Input, Radio } from 'antd';
 export default class Address extends Component {
 
   state = {
-    visible: false
+    visible: false,
+    isEdit: false,
+    editId: 0,
+    address: {}
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.load();
   }
 
@@ -19,15 +21,20 @@ export default class Address extends Component {
     this.props.getAddresses();
   }
 
-  onEdit = () => {
+  onEdit = (address) => {
     this.setState({
       visible: true,
+      isEdit: true,
+      address: address
+      // editId: address.id
     })
   }
 
-  handleAdd = () => {
+  onAdd = () => {
     this.setState({
       visible: true,
+      isEdit: false,
+      address: {}
     })
   }
 
@@ -42,12 +49,14 @@ export default class Address extends Component {
       if (err) {
         return;
       }
-
-      form.resetFields();
-      this.props.postAddress(values);
-      this.setState({ visible: false }, () => {
-        this.load();
-      });
+      if(this.state.isEdit) {
+        values.id = this.state.address.id;
+        this.props.putAddress(values);
+      }else {
+        this.props.postAddress(values);
+      }
+      form.resetFields();     
+      this.setState({ visible: false });
     });
   }
 
@@ -70,7 +79,7 @@ export default class Address extends Component {
         >
           <Row gutter={10}>
             {addresses.map(address => (
-              <Col key={address.id} xs={12} sm={12} md={12} lg={8}>
+              <Col key={address.id} xs={12} sm={12} md={12} lg={8} style={{marginTop: '10px'}}>
                 <Card className="address-item">
                   <div>
                     <p>
@@ -81,7 +90,7 @@ export default class Address extends Component {
                         {address.sex}
                       </span>
                       <span className="address-operate">
-                        <span className="address-edit" onClick={this.onEdit}>
+                        <span className="address-edit" onClick={() => this.onEdit(address)}>
                           修改
                         </span>
                         <span>
@@ -100,8 +109,8 @@ export default class Address extends Component {
               </Col>
             ))}
             
-            <Col xs={12} sm={12} md={12} lg={8}>
-              <Card className="address-add" onClick={this.handleAdd}>
+            <Col xs={12} sm={12} md={12} lg={8} style={{marginTop: '10px'}}>
+              <Card className="address-add" onClick={this.onAdd}>
                 <Icon type="plus" />
                 添加新地址
               </Card>
@@ -113,6 +122,7 @@ export default class Address extends Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onOk={this.handleCreate}
+          formData={this.state.address}
         />
       </div>
     )
@@ -120,7 +130,29 @@ export default class Address extends Component {
 }
 
 
-const AddOrEditAddressForm = Form.create({ name: 'form_in_modal' })(
+const AddOrEditAddressForm = Form.create(
+  { name: 'form_in_modal',
+    mapPropsToFields(props) {
+
+      console.log(props);
+      
+      return { 
+        name: Form.createFormField({
+          value: props.formData.name,
+        }),
+        sex: Form.createFormField({
+          value: props.formData.sex,
+        }),
+        place: Form.createFormField({
+          value: props.formData.place,
+        }),
+        phone: Form.createFormField({
+          value: props.formData.phone,
+        }),
+      }
+    }
+  })
+  (
   // eslint-disable-next-line
   class extends React.Component {
     render() {
@@ -148,8 +180,8 @@ const AddOrEditAddressForm = Form.create({ name: 'form_in_modal' })(
             <Form.Item label="性别">
               {getFieldDecorator('sex', )(
                 <Radio.Group>
-                  <Radio value="male">先生</Radio>
-                  <Radio value="female">女士</Radio>
+                  <Radio value="先生">先生</Radio>
+                  <Radio value="女士">女士</Radio>
                 </Radio.Group>
               )}
             </Form.Item>
