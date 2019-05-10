@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Address from '@/components/Address/Address'
-import { GetAddressesAction, PostAddressesAction, PutAddressesAction } from '../actions'
+import { GetAddressesAction, PostAddressesAction, PutAddressesAction, DeleteAddressesAction } from '../actions'
 
 const mapStateToProps = (state) => {
   return { address: state.address }
@@ -15,6 +15,9 @@ export const mapDispatchToProps = (dispatch) => {
     },
     putAddress: (data) => {
       dispatch(PutAddressesAction(data))
+    },
+    deleteAddress: (id) => {
+      dispatch(DeleteAddressesAction(id))
     }
   }
 }

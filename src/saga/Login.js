@@ -4,7 +4,6 @@ import { login } from '@/api'
 
 function* yieldLogin(action) {
   const res = yield call(login, action.payload);
-  console.log(res);
   if(res.token) {
     action.onSuccess();
     yield put({ type: RECEIVE_TOKEN, payload: res.token });

@@ -111,7 +111,6 @@ Mock.mock(`${baseUrl}login`, 'post', (options) => {
  * 获取商店接口
  */
 Mock.mock(`${baseUrl}stores`, (options) => {
-  console.log(options);
   let res = [];
   for(let i = 0;i < 9;i++) {
     let obj = {
@@ -130,15 +129,13 @@ Mock.mock(`${baseUrl}stores`, (options) => {
 })
 
 
-const addresses = [];
+let addresses = [];
 let addid = 0;
 
 /**
  * 获取地址
  */
 Mock.mock(`${baseUrl}addresses`, (options) => {
-  console.log(addresses);
-  
   return addresses
 })
 
@@ -151,7 +148,6 @@ Mock.mock(`${baseUrl}address`, 'post', (options) => {
   
   addid += 1;
   address.id = addid;
-  console.log(address);
   addresses.push(address);
 })
 
@@ -160,24 +156,26 @@ Mock.mock(`${baseUrl}address`, 'post', (options) => {
  */
 Mock.mock(`${baseUrl}address`, 'put', (options) => {
   let address = JSON.parse(options.body);
-  console.log(address);
-  
   const id = address.id;
   for(let i of addresses) {
-    console.log(i);
-    
     if(i.id === id) {
       i = Object.assign(i, address);
     } 
   }
-  console.log(addresses);
-  
 })
 
 /**
  * 删除地址
  */
-Mock.mock(`${baseUrl}address`, (options) => {
-  const address = JSON.parse(options.body);
-  addresses.filter(item => item.id !== address.id)
+Mock.mock( /http:\/\/localhost:3000\/address\/\d+/, 'delete', (options) => {
+  const url = options.url;
+  const id = parseInt(url.substring(url.lastIndexOf('/') + 1)); 
+
+  for(let i = 0;i < addresses.length;i++) {
+    
+    if(addresses[i].id === id) {
+      addresses.splice(i, 1);
+    }
+  }
+
 })

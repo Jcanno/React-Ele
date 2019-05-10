@@ -54,10 +54,9 @@ export const putaddress = (data) => {
 /** 
  * 删除地址
 */
-export const deleteaddress = (data) => {
+export const deleteaddress = (id) => {
   return axios.request({
-    url: `address`,
-    data,
+    url: `address/${id}`,
     method: 'delete'
   })
 }

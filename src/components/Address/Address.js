@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SiderBar from '../Layout/SiderBar/SiderBar'
 import './Address.less'
-import { Card, Row, Col, Icon, Modal, Form, Input, Radio } from 'antd';
+import { Card, Row, Col, Icon, Modal, Form, Input, Radio, Popconfirm } from 'antd';
 
 
 export default class Address extends Component {
@@ -21,12 +21,15 @@ export default class Address extends Component {
     this.props.getAddresses();
   }
 
+  onDelete = (id) => {
+    this.props.deleteAddress(id)
+  }
+
   onEdit = (address) => {
     this.setState({
       visible: true,
       isEdit: true,
       address: address
-      // editId: address.id
     })
   }
 
@@ -93,9 +96,16 @@ export default class Address extends Component {
                         <span className="address-edit" onClick={() => this.onEdit(address)}>
                           修改
                         </span>
-                        <span>
-                          删除
-                        </span>
+                        <Popconfirm 
+                          title="确认删除?"
+                          okText="确定"
+                          cancelText="取消"
+                          onConfirm={() => this.onDelete(address.id)}
+                        >
+                          <span>
+                            删除
+                          </span>
+                        </Popconfirm>
                       </span>
                     </p>
                     <span className="address-place">
@@ -133,9 +143,6 @@ export default class Address extends Component {
 const AddOrEditAddressForm = Form.create(
   { name: 'form_in_modal',
     mapPropsToFields(props) {
-
-      console.log(props);
-      
       return { 
         name: Form.createFormField({
           value: props.formData.name,
@@ -151,8 +158,7 @@ const AddOrEditAddressForm = Form.create(
         }),
       }
     }
-  })
-  (
+  })(
   // eslint-disable-next-line
   class extends React.Component {
     render() {
