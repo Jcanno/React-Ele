@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import './StoreDetail.less'
 import { Avatar, Typography, Rate, Row, Col, Button, Icon } from 'antd'
-import store from '@/assets/store.jpg'
 
 export default class StoreDetail extends Component {
 
   state = {
    style: {} 
+  }
+
+  componentDidMount() {
+    this.props.getStoreDetails()
   }
 
   openBarket = () => {
@@ -40,13 +43,15 @@ export default class StoreDetail extends Component {
   render() {
 
     const { Title, Text } = Typography;
+    const store = this.props.home.store;
+    const storeDetails = this.props.storeDetails.storeDetails
 
     return (
       <div>
         <div className="detail-header">
           <div className="detail-intro">
             <Avatar 
-              src={store}
+              src={store.storeimg}
               size={80}
               className="detail-avatar"
             />
@@ -55,11 +60,11 @@ export default class StoreDetail extends Component {
                 className="detail-name" 
                 level={4}
               >
-                德克士(百里路店)
+                {store.storename}
               </Title>
               <Rate 
                 className="detail-rate"
-                defaultValue={4.5}
+                defaultValue={store.storerate}
                 allowHalf
                 disabled
               />
@@ -72,52 +77,55 @@ export default class StoreDetail extends Component {
             </div>
             <div className="detail-fee">
               <span>配送费</span>
-              <strong>配送费￥1</strong>
+              <strong>{store.storefee}</strong>
             </div>
             <div className="detail-speed">
               <span>平均送达速度</span>
-              <strong>30分钟</strong>
+              <strong>{store.storetime}</strong>
             </div>
           </div>
         </div>
         <div className="detail-goods">
 
           <Row gutter={10}>
-            <Col span={12}>
-              <div className="detail-item">
-                <Avatar 
-                  src={store}
-                  size={100}
-                  shape="square"
-                  className="detail-avatar"
-                />
-                <div className="detail-goodbox">
-                  <Text className="detail-goodname">
-                    咖喱鸡烩饭+水果沙拉
-                  </Text>
-                  <Text className="detail-gooddesc">
-                    主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊
-                  </Text>
-                  <Rate 
-                    className="detail-goodrate"
-                    defaultValue={4.5}
-                    allowHalf
-                    disabled
+            {storeDetails.map(storeDetail => (
+              <Col span={12} key={storeDetail.id}>
+                <div className="detail-item">
+                  <Avatar 
+                    src={storeDetail.menuimg}
+                    size={100}
+                    shape="square"
+                    className="detail-avatar"
                   />
-                  <Text className="detail-goodcount">
-                    月售2份
-                  </Text>
-                  <Text className="detail-goodprice">
-                    ￥66
-                    <Button onClick={this.addShop} type="primary" shape="round" size="small" style={{float: "right"}}>
-                      加入购物车
-                    </Button>
-                  </Text>
-                  
-                </div>
-              </div>
-            </Col>
+                  <div className="detail-goodbox">
+                    <Text className="detail-goodname">
+                      {storeDetail.menuname}
+                    </Text>
+                    <Text className="detail-gooddesc">
+                      {storeDetail.menuintro}
+                    </Text>
+                    <Rate 
+                      className="detail-goodrate"
+                      defaultValue={storeDetail.menurate}
+                      allowHalf
+                      disabled
+                    />
+                    <Text className="detail-goodcount">
+                      月售{storeDetail.menucount}份
+                    </Text>
+                    <Text className="detail-goodprice">
+                      ￥{storeDetail.menuprice}
+                      <Button onClick={this.addShop} type="primary" shape="round" size="small" style={{float: "right"}}>
+                        加入购物车
+                      </Button>
+                    </Text>
 
+                  </div>
+                </div>
+              </Col>
+            ))}
+            
+{/* 
             <Col span={12}>
               <div className="detail-item">
                 <Avatar 
@@ -220,7 +228,7 @@ export default class StoreDetail extends Component {
                   </Text>                 
                 </div>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </div>
 

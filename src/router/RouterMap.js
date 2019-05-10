@@ -26,7 +26,7 @@ const RouterList = [
     path: '/address'
   },
   {
-    component: () => import('../components/StoreDetail/StoreDetail'),
+    component: () => import('../containers/StoreDetail'),
     path: '/store'
   },
   {

@@ -31,7 +31,7 @@ class HeaderDom extends Component {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to='/storedetail'>
+          <Link to='/orderdetail'>
             订单详情
           </Link>
         </Menu.Item>

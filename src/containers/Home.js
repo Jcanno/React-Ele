@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Home from '@/components/Home/Home'
-import { GetStoresAction } from '../actions'
+import { GetStoresAction, SaveStoreAction } from '../actions'
 import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
@@ -12,6 +12,11 @@ const mapDispatchToProps = (dispatch) => {
     getStores: (data, callback) => {
       dispatch(
         GetStoresAction(data, callback)
+      )
+    },
+    saveStore: (data) => {
+      dispatch(
+        SaveStoreAction(data)
       )
     } 
   }

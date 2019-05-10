@@ -10,6 +10,17 @@ import store7 from '@/assets/store/store7.jpg'
 import store8 from '@/assets/store/store8.jpg'
 import store9 from '@/assets/store/store9.jpg'
 
+import storeDetail1 from '@/assets/storeDetail/storeDetail1.jpg'
+import storeDetail2 from '@/assets/storeDetail/storeDetail2.jpg'
+import storeDetail3 from '@/assets/storeDetail/storeDetail3.jpg'
+import storeDetail4 from '@/assets/storeDetail/storeDetail4.jpg'
+import storeDetail5 from '@/assets/storeDetail/storeDetail5.jpg'
+import storeDetail6 from '@/assets/storeDetail/storeDetail6.jpg'
+import storeDetail7 from '@/assets/storeDetail/storeDetail7.jpg'
+import storeDetail8 from '@/assets/storeDetail/storeDetail8.jpg'
+import storeDetail9 from '@/assets/storeDetail/storeDetail9.jpg'
+import storeDetail10 from '@/assets/storeDetail/storeDetail10.jpg'
+
 const Random = Mock.Random;
 const tokens = [
   '0x8546846545411589', '0x3246846551254863', 
@@ -46,16 +57,31 @@ const storeintros = [
 ]
 
 const storeimgs = [
-  store1,
-  store2,
-  store3,
-  store4,
-  store5,
-  store6,
-  store7,
-  store8,
-  store9,
+  store1, store2, store3, store4, store5, store6, store7, store8, store9,
 ]
+
+const menuimgs = [
+  storeDetail1, storeDetail2, storeDetail3, storeDetail4, storeDetail5, storeDetail6, storeDetail7, storeDetail8, storeDetail9, storeDetail10
+]
+
+const menunames = [
+  '梅菜炒饭', '广式腊肠炒饭', '生炒牛肉炒饭', '土豆肉丝木桶饭', '蜜汁烤肉拌饭',
+  '美味稻香肉', '伏地魔（超级鸡车）', '炒粉干', '蛋炒饭', '蜜汁叉烧脆皮鸡饭'
+]
+
+const menuintros = [
+  '主要原料: 墨鱼, 蛤蜊',
+  '1全翅2鸡腿2中翅4鸡块 主要原料: 鸡肉',
+  '鸡翅包饭一个 主要原料: 鸡翅',
+  '口水鸡 主要原料: 黄瓜, 鸡肉',
+  '主要原料: 五花肉',
+  '食材明细   豆干  肉丝   主要原料: 豆干, 猪肉',
+  '食材明细 烤肉 土豆丝 黄瓜丝 主要原料: 鸡肉',
+  '水果茶可以做去冰货值是少冰',
+  '米饭，鲜蔬，雪菜，萝卜干，卤猪肉',
+  '米饭，鲜蔬，雪菜，萝卜干，猪大排'
+]
+
 
 Random.extend({
   token: function() {
@@ -76,6 +102,15 @@ Random.extend({
   storeintro: function() {
     return this.pick(storeintros)
   },
+  menuimg: function() {
+    return this.pick(menuimgs)
+  },
+  menuname: function() {
+    return this.pick(menunames)
+  },
+  menuintro: function() {
+    return this.pick(menuintros)
+  }
 })
 
 
@@ -144,8 +179,6 @@ Mock.mock(`${baseUrl}addresses`, (options) => {
  */
 Mock.mock(`${baseUrl}address`, 'post', (options) => {
   const address = JSON.parse(options.body);
-  
-  
   addid += 1;
   address.id = addid;
   addresses.push(address);
@@ -170,12 +203,31 @@ Mock.mock(`${baseUrl}address`, 'put', (options) => {
 Mock.mock( /http:\/\/localhost:3000\/address\/\d+/, 'delete', (options) => {
   const url = options.url;
   const id = parseInt(url.substring(url.lastIndexOf('/') + 1)); 
-
   for(let i = 0;i < addresses.length;i++) {
-    
     if(addresses[i].id === id) {
       addresses.splice(i, 1);
     }
   }
 
+})
+
+/**
+ * 获取菜单商品
+ */
+Mock.mock( `${baseUrl}storeDetail`, () => {
+  let res = [];
+  let num = Random.natural(1, 10);
+  for(let i = 0;i < num;i++) {
+    let obj = {
+      id: i + 1,
+      menuname: menunames[i],
+      menuimg: menuimgs[i],
+      menurate: Random.storerate(),
+      menucount: Random.natural(1, 1000),
+      menuprice: Random.natural(10, 40),
+      menuintro: Random.menuintro(),
+    }
+    res.push(obj);
+  }
+  return res
 })

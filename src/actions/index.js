@@ -5,7 +5,9 @@ import {
   GET_ADDRESSES,
   POST_ADDRESSES,
   PUT_ADDRESSES,
-  DELETE_ADDRESSES
+  DELETE_ADDRESSES,
+  SAVE_STORES,
+  GET_STOREDETAIL
 } from '../constants'
 
 
@@ -39,6 +41,26 @@ export const GetStoresAction = (callback) => {
     onSuccess: callback
   }
 }
+
+/**
+ * 当前商店详情action
+ */
+export const SaveStoreAction = (data) => {
+  return {
+    type: SAVE_STORES,
+    payload: data
+  }
+}
+
+/**
+ * 当前菜单详情action
+ */
+export const GetStoreDetailAction = (data) => {
+  return {
+    type: GET_STOREDETAIL,
+  }
+}
+
 
 /**
  * 获取地址action

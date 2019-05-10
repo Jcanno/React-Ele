@@ -2,11 +2,13 @@ import { combineReducers } from 'redux'
 import login from './Login'
 import home from './Home'
 import address from './Address'
+import storeDetail from './StoreDetail'
 
 const reducer = combineReducers({
   login,
   home,
-  address
+  address,
+  storeDetail
 })
 
 export default reducer

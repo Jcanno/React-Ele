@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import { List, Row, Col } from 'antd'
 import StoreItem from '../StoreItem/StroeItem'
 import './Home.less'
+import { withRouter } from 'react-router-dom'
 
-
-export default class Home extends Component {
+class Home extends Component {
 
   componentDidMount() {
     this.props.getStores();
     console.log(this.props);
     
+  }
+
+  goToDetail = (store) => {
+    this.props.history.push('/store');
+    this.props.saveStore(store);
   }
 
   render() {
@@ -32,16 +37,24 @@ export default class Home extends Component {
         >
           <Row>
             {stores.map((store, index) => (
-              <Col key={index} xs={storeGird.xs}  sm={storeGird.sm} md={storeGird.md} lg={storeGird.lg}>
+              <Col 
+                key={index} 
+                xs={storeGird.xs}  
+                sm={storeGird.sm} 
+                md={storeGird.md} 
+                lg={storeGird.lg} 
+                onClick={() => this.goToDetail(store)}
+              >
                 <StoreItem 
                   store={store}
                 />
               </Col>
-            ))
-            }
+            ))}
           </Row>
         </List>
       </div>
     )
   }
 }
+
+export default withRouter(Home)

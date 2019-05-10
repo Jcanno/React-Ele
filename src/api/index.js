@@ -21,6 +21,15 @@ export const stores = () => {
 }
 
 /** 
+ * 获取商品详情
+*/
+export const storeDetails = () => {
+  return axios.request({
+    url: `storeDetail`
+  })
+}
+
+/** 
  * 获取地址
 */
 export const addresses = () => {

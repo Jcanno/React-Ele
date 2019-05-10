@@ -11,6 +11,8 @@ export default class OrderDetail extends Component {
   render() {
 
 
+    const store = this.props.home.store;
+
     const data = [{
       key: '1',
       good: '牛肉饼',
@@ -69,6 +71,7 @@ export default class OrderDetail extends Component {
                 />
               </Table>
               <p className="order-fee-box">
+                {store.storefee}
                 配送费 <span className="order-fee">￥1</span>
               </p>
 
