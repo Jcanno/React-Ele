@@ -7,7 +7,9 @@ import {
   PUT_ADDRESSES,
   DELETE_ADDRESSES,
   SAVE_STORES,
-  GET_STOREDETAIL
+  GET_STOREDETAIL,
+  SAVE_STOREDETAIL,
+  CLEAR_STOREDETAIL
 } from '../constants'
 
 
@@ -98,5 +100,25 @@ export const DeleteAddressesAction = (id) => {
   return {
     type: DELETE_ADDRESSES,
     payload: id
+  }
+}
+
+/**
+ * 保存商品加入购物车action
+ */
+export const SaveStoreDetailAction = (data) => {
+  return {
+    type: SAVE_STOREDETAIL,
+    payload: data
+  }
+}
+
+
+/**
+ * 清空购物车action
+ */
+export const ClearStoreDetailAction = () => {
+  return {
+    type: CLEAR_STOREDETAIL,
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './StoreDetail.less'
-import { Avatar, Typography, Rate, Row, Col, Button, Icon } from 'antd'
+import { Avatar, Typography, Rate, Row, Col, Button, Icon, InputNumber } from 'antd'
 
 export default class StoreDetail extends Component {
 
@@ -16,28 +16,54 @@ export default class StoreDetail extends Component {
     let e = document.getElementsByClassName('shop-cartbarket')[0];
     var style = getComputedStyle(e, null);
     if(style.top === '0px'){
-      this.setState({
-        style: {
-          top: '-208px'
-        }
-      })
+      if(this.props.cart.cart.length > 0) {
+        let top = - this.props.cart.cart.length * 46 - 40;
+        this.changeBarketTop(top);
+      }else {
+        this.changeBarketTop(-208);
+      }
     }else{
-      this.setState({
-        style: {
-          top: '0px'
-        }
-      })
+      this.changeBarketTop(0);
     }
   }
 
-  addShop = () => {
-    let top = parseInt(this.state.style.top) - 46;
-    
+  clearCart = () => {
+    this.props.clearCart();
+    this.forceUpdate();
+    this.changeBarketTop(-40);
+  }
+
+  changeBarketTop = (top) => {
     this.setState({
       style: {
         top: `${top}px`
       }
     })
+  }
+
+  onChange = (value, storeDetail) => {
+    storeDetail.number = value;
+    this.props.saveCart(storeDetail);
+    let top = - this.props.cart.cart.length * 46 - 40;
+    this.changeBarketTop(top);
+    this.forceUpdate();
+  }
+
+  addShop = (storeDetail) => {
+    storeDetail.number = 1;
+    this.props.saveCart(storeDetail);
+    this.forceUpdate();
+    let top = - this.props.cart.cart.length * 46 - 40;
+    this.changeBarketTop(top);
+    
+  }
+
+  goodIsExistIncart(storeDetail) {
+    if(this.props.cart.cart.some(item => item.id  === storeDetail.id)) {
+      return true;
+    }else {
+      return false;
+    }
   }
 
   render() {
@@ -86,7 +112,6 @@ export default class StoreDetail extends Component {
           </div>
         </div>
         <div className="detail-goods">
-
           <Row gutter={10}>
             {storeDetails.map(storeDetail => (
               <Col span={12} key={storeDetail.id}>
@@ -115,120 +140,30 @@ export default class StoreDetail extends Component {
                     </Text>
                     <Text className="detail-goodprice">
                       ￥{storeDetail.menuprice}
-                      <Button onClick={this.addShop} type="primary" shape="round" size="small" style={{float: "right"}}>
-                        加入购物车
-                      </Button>
+                      {this.goodIsExistIncart(storeDetail) ? (
+                        <InputNumber 
+                          min={0}
+                          onChange={(value) => this.onChange(value, storeDetail)}
+                          defaultValue={1}
+                          value={storeDetail.number}
+                          style={{float: "right"}}
+                        />
+                      ) : (
+                        <Button 
+                          onClick={() => this.addShop(storeDetail)} 
+                          type="primary" 
+                          shape="round" 
+                          size="small" 
+                          style={{float: "right"}}
+                        >
+                          加入购物车
+                        </Button>
+                      )}              
                     </Text>
-
                   </div>
                 </div>
               </Col>
             ))}
-            
-{/* 
-            <Col span={12}>
-              <div className="detail-item">
-                <Avatar 
-                  src={store}
-                  size={100}
-                  shape="square"
-                  className="detail-avatar"
-                />
-                <div className="detail-goodbox">
-                  <Text className="detail-goodname">
-                    咖喱鸡烩饭+水果沙拉
-                  </Text>
-                  <Text className="detail-gooddesc">
-                    主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊
-                  </Text>
-                  <Rate 
-                    className="detail-goodrate"
-                    defaultValue={4.5}
-                    allowHalf
-                    disabled
-                  />
-                  <Text className="detail-goodcount">
-                    月售2份
-                  </Text>
-                  <Text className="detail-goodprice">
-                    ￥66
-                    <Button type="primary" shape="round" size="small" style={{float: "right"}}>
-                      加入购物车
-                    </Button>
-                  </Text>
-                  
-                </div>
-              </div>
-            </Col>
-
-            <Col span={12}>
-              <div className="detail-item">
-                <Avatar 
-                  src={store}
-                  size={100}
-                  shape="square"
-                  className="detail-avatar"
-                />
-                <div className="detail-goodbox">
-                  <Text className="detail-goodname">
-                    咖喱鸡烩饭+水果沙拉
-                  </Text>
-                  <Text className="detail-gooddesc">
-                    主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊
-                  </Text>
-                  <Rate 
-                    className="detail-goodrate"
-                    defaultValue={4.5}
-                    allowHalf
-                    disabled
-                  />
-                  <Text className="detail-goodcount">
-                    月售2份
-                  </Text>
-                  <Text className="detail-goodprice">
-                    ￥66
-                    <Button type="primary" shape="round" size="small" style={{float: "right"}}>
-                      加入购物车
-                    </Button>
-                  </Text>
-                  
-                </div>
-              </div>
-            </Col>
-
-            <Col span={12}>
-              <div className="detail-item">
-                <Avatar 
-                  src={store}
-                  size={100}
-                  shape="square"
-                  className="detail-avatar"
-                />
-                <div className="detail-goodbox">
-                  <Text className="detail-goodname">
-                    咖喱鸡烩饭+水果沙拉
-                  </Text>
-                  <Text className="detail-gooddesc">
-                    主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊主要原料: 墨鱼, 蛤蜊
-                  </Text>
-                  <Rate 
-                    className="detail-goodrate"
-                    defaultValue={4.5}
-                    allowHalf
-                    disabled
-                  />
-                  <Text className="detail-goodcount">
-                    月售2份
-                  </Text>
-                  <Text className="detail-goodprice">
-                    ￥66
-                    <Button type="primary" shape="round" size="small" style={{float: "right"}}>
-                      加入购物车
-                    </Button>
-                  </Text>                 
-                </div>
-              </div>
-            </Col> */}
           </Row>
         </div>
 
@@ -240,26 +175,66 @@ export default class StoreDetail extends Component {
               size={40}
               style={{color: 'white',fontSize: '30px'}}
             />
+            {this.props.cart.total > 0 ? (
+              <span className="shop-cartfooter-total">￥{this.props.cart.total}</span>
+            ) : (
+              false
+            )}
             <span className="shop-cartfooter-text">
-              配送费￥1
+              {store.storefee}
             </span>
-            <Button className="shop-cartfooter-checkout">
-              购物车是空的
-            </Button>
+            {this.props.cart.cart.length > 0 ? (
+              <Button className="shop-cartfooter-gopay">去结算</Button>
+            ) : (
+              <Button className="shop-cartfooter-checkout">
+                购物车是空的
+              </Button>
+            )}
+            
           </div>
           <div className="shop-cartbarket" style={this.state.style}>
             <div className="shop-cartbarket-header">
               <span>购物车</span>
-              <span className="shop-cartbarket-clear">[清空]</span>
+              <span 
+                className="shop-cartbarket-clear"
+                onClick={this.clearCart}
+              >[清空]</span>
             </div>
-            <div className="shop-cartbarket-empty">
-              <Icon 
-                type="shopping-cart"
-                size={50}
-                style={{fontSize: '50px'}}
-              />
-              <p>购物车是空的，赶紧选购吧</p>
-            </div>
+            {this.props.cart.cart.length > 0 ? (
+              <div >
+                {this.props.cart.cart.map(item => (
+                  <Row
+                    key={item.id} 
+                    type="flex"
+                    align="middle"
+                    className="shop-cartbarket-item">
+                    <Col className="shop-cartbarket-item-name" span={10}>
+                      {item.menuname}
+                    </Col>
+                    <Col span={8}>
+                      <InputNumber 
+                        min={0}
+                        onChange={(value) => this.onChange(value, item)}
+                        value={item.number}
+                      />
+                    </Col>
+                    <Col className="shop-cartbarket-item-price" span={6}>
+                      ${item.number * item.menuprice}
+                    </Col>
+                  </Row>
+                ))}
+                
+              </div>
+            ) : (
+              <div className="shop-cartbarket-empty">
+                <Icon 
+                  type="shopping-cart"
+                  size={50}
+                  style={{fontSize: '50px'}}
+                />
+                <p>购物车是空的，赶紧选购吧</p>
+              </div>
+            )}            
           </div>
         </div>
       </div>

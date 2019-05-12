@@ -52,14 +52,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-  }
-
-
-  .datail-rate {
-
-  }
-
-  
+  }  
 }
 
 .detail-goods {
@@ -145,6 +138,25 @@
       cursor: pointer;
     }
 
+    &-item {
+      width: 100%;
+      height: 46px;
+      
+      &-name {
+        font-size: 15px;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &-price {
+        color: #ff6a00;
+        font-weight: bold;
+
+      }
+    }
+
     &-empty {
       display: flex;
       flex-direction: column;
@@ -173,6 +185,13 @@
       margin-left: 10px;
       padding-left: 10px;
     }
+
+    .shop-cartfooter-total {
+      display: inline-block;
+      font-size: 18px;
+      color: #fff;
+      margin-left: 10px;
+    }
     
     .shop-cartfooter-checkout {
       position: absolute;
@@ -180,11 +199,23 @@
       right: 0;
       top: 0;
       height: 100%;
+      width: 100px;
       background-color: #e4e4e4;
       color: #333;
       cursor: default;
     }
 
+    .shop-cartfooter-gopay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 100px;
+      background-color: #00e365;
+      color: #333;
+      cursor: default;
+    }
     
   }
 }
