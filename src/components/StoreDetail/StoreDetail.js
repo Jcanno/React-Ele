@@ -9,7 +9,11 @@ export default class StoreDetail extends Component {
   }
 
   componentDidMount() {
-    this.props.getStoreDetails()
+    this.props.getStoreDetails();
+  }
+
+  componentWillUnmount() {
+    this.clearCart();
   }
 
   openBarket = () => {
@@ -31,6 +35,10 @@ export default class StoreDetail extends Component {
     this.props.clearCart();
     this.forceUpdate();
     this.changeBarketTop(-40);
+  }
+
+  gotopay = () => {
+    this.props.history.push('/orderdetail');
   }
 
   changeBarketTop = (top) => {
@@ -144,7 +152,6 @@ export default class StoreDetail extends Component {
                         <InputNumber 
                           min={0}
                           onChange={(value) => this.onChange(value, storeDetail)}
-                          defaultValue={1}
                           value={storeDetail.number}
                           style={{float: "right"}}
                         />
@@ -184,7 +191,12 @@ export default class StoreDetail extends Component {
               {store.storefee}
             </span>
             {this.props.cart.cart.length > 0 ? (
-              <Button className="shop-cartfooter-gopay">去结算</Button>
+              <Button 
+                onClick={this.gotopay}
+                className="shop-cartfooter-gopay"
+              >
+                去结算
+              </Button>
             ) : (
               <Button className="shop-cartfooter-checkout">
                 购物车是空的
@@ -223,7 +235,6 @@ export default class StoreDetail extends Component {
                     </Col>
                   </Row>
                 ))}
-                
               </div>
             ) : (
               <div className="shop-cartbarket-empty">

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import StoreDetail from '@/components/StoreDetail/StoreDetail'
 import { GetStoreDetailAction, SaveStoreDetailAction, ClearStoreDetailAction } from '../actions'
+import { withRouter } from 'react-router-dom'
+
 
 const mapStateToProps = (state) => {
   return { 
@@ -29,8 +31,9 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
-
-export default connect(
+const StoreDetailMap = connect(
   mapStateToProps,
   mapDispatchToProps
 )(StoreDetail)
+
+export default withRouter(StoreDetailMap)

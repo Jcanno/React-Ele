@@ -72,7 +72,6 @@ export default class OrderDetail extends Component {
               </Table>
               <p className="order-fee-box">
                 {store.storefee}
-                配送费 <span className="order-fee">￥1</span>
               </p>
 
               <p className="order-total-fee">
