@@ -8,12 +8,12 @@ export default class StoreDetail extends Component {
    style: {} 
   }
 
-  componentDidMount() {
-    this.props.getStoreDetails();
+  componentWillMount() {
+    this.clearCart();
   }
 
-  componentWillUnmount() {
-    this.clearCart();
+  componentDidMount() {
+    this.props.getStoreDetails();
   }
 
   openBarket = () => {
@@ -63,6 +63,7 @@ export default class StoreDetail extends Component {
     this.forceUpdate();
     let top = - this.props.cart.cart.length * 46 - 40;
     this.changeBarketTop(top);
+    console.log(this.props.cart.cart);
     
   }
 
@@ -111,7 +112,7 @@ export default class StoreDetail extends Component {
             </div>
             <div className="detail-fee">
               <span>配送费</span>
-              <strong>{store.storefee}</strong>
+              <strong>配送费 ￥ {store.storefee}</strong>
             </div>
             <div className="detail-speed">
               <span>平均送达速度</span>
@@ -188,7 +189,7 @@ export default class StoreDetail extends Component {
               false
             )}
             <span className="shop-cartfooter-text">
-              {store.storefee}
+              配送费 ￥ {store.storefee}
             </span>
             {this.props.cart.cart.length > 0 ? (
               <Button 
@@ -213,7 +214,7 @@ export default class StoreDetail extends Component {
               >[清空]</span>
             </div>
             {this.props.cart.cart.length > 0 ? (
-              <div >
+              <div>
                 {this.props.cart.cart.map(item => (
                   <Row
                     key={item.id} 
@@ -231,7 +232,7 @@ export default class StoreDetail extends Component {
                       />
                     </Col>
                     <Col className="shop-cartbarket-item-price" span={6}>
-                      ${item.number * item.menuprice}
+                      ￥{item.number * item.menuprice}
                     </Col>
                   </Row>
                 ))}

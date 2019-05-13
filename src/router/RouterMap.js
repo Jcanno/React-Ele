@@ -14,10 +14,6 @@ const RouterList = [
     path: '/myorder'
   },
   {
-    component: () => import('../components/My/My'),
-    path: '/my'
-  },
-  {
     component: () => import('../containers/Login'),
     path: '/login'
   },
@@ -32,6 +28,10 @@ const RouterList = [
   {
     component: () => import('../containers/OrderDetail'),
     path: '/orderdetail'
+  },
+  {
+    component: () => import('../components/Pay/Pay'),
+    path: '/pay'
   },
 
 ]

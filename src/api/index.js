@@ -69,3 +69,23 @@ export const deleteaddress = (id) => {
     method: 'delete'
   })
 }
+
+/** 
+ * 添加订单
+*/
+export const postorder = (data) => {
+  return axios.request({
+    url: `order`,
+    method: 'post',
+    data
+  })
+}
+
+/** 
+ * 获取订单
+*/
+export const getorders = () => {
+  return axios.request({
+    url: `orders`,
+  })
+}

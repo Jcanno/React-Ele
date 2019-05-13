@@ -1,37 +1,69 @@
 import React, { Component } from 'react'
 import './OrderDetail.less'
-import { Steps, Icon, Row, Col, Card, Table, InputNumber, } from 'antd';
+import { 
+  Steps, 
+  Icon, 
+  Row, 
+  Col, 
+  Card, 
+  InputNumber, 
+  message 
+} from 'antd';
 
 export default class OrderDetail extends Component {
 
+
+  state = {
+    selectStyle: {
+      borderColor: '#1890ff',
+      background: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA9lBMVEUAAAAeieAeieAeieAeieAeieAeieAeieAeieAeieAeieAeieAhi+ANgN4Hfd0giuAfieAEe9w4luNMoeYKf90dieAdiOAAedwbiODm8vv///9Jn+YIfd0hi+ERg94BetwXhd8bh+Db7Prk8fszlOMNgN0Rgt4/muSFv+4Sg9/c7PrZ6/oZht8EfNwYhuDQ5vin0fMAeNwRgd4Cetzc7foYht8ciOAOgd5bqej+/v+p0vMAb9kSgt/d7frY6voeiuAAdNpHn+X9/v6izvLI4/jX6vpHnuX8/f7W6voWhd9In+Xi8PtPo+c0leMFe90Gfd0OgN4AAABS6aalAAAAC3RSTlMAdI6A/PDykHP35u7NkAkAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAABBElEQVQ4y4XR2VrCMBAF4GoFhIk2ClIdQFBEZREFZXFlcWFR0Pd/GtsG0jakyVz/XyZzjmHoZksrtkEnTNjRCohpBcS1Qk08oSRMqMhKKMhaRBMuIokvokhARJCgkJOQkJKwkBEuyN6+RWXEFweH6YwlISYcZZmwj08wl98kJhROiyXiirNzLF9UNoiz5fLqulopOG/UsN64ISJxRDN/i3et9n32Aesdm4gXuT/t9vqP+PT88opvTISIdwsdDEdjfP/AzxITQbK6lsLwa4I4nRWJGB3PwzFz/ObCJ4HUKdg/iyURCwj1Qq3fPy7WRGhOUqNKMKIUHlELlyRAM8YuJOPKSf0D2NEjZKfWInYAAAAASUVORK5CYII=) right bottom no-repeat'
+    },
+    style: {},
+    selectIndex: 0
+  }
+
+  selectAddress = (index) => {
+    this.setState({
+      selectIndex: index
+    })
+  }
+
   onConfirm = () => {
-    
+    if(this.props.cart.cart.length === 0) {
+      message.error('请添加商品后再确认下单！');
+    }else if(this.props.address.addresses.length === 0) {
+      message.error('请添加收货地址！');
+    }else {
+      let order = {};
+      order.storeimg = this.props.home.store.storeimg;
+      order.time = new Date();
+      order.paid = this.props.home.store.storefee + this.props.cart.total;
+      let menuname = "";
+      for(let i of this.props.cart.cart) {
+        menuname += i.menuname + ' ';
+      }
+      order.menuname = menuname;
+      this.props.saveOrder(order);
+      this.props.history.push('/pay');
+    }
+  }
+
+  onChange = (value, storeDetail) => {
+    storeDetail.number = value;
+    this.props.saveCart(storeDetail);
+    this.forceUpdate();
+  }
+
+  totalNumber = () => {
+    let number = 0;
+    this.props.cart.cart.map(item => number += item.number);
+    return number;
   }
 
   render() {
 
-
     const store = this.props.home.store;
-
-    const data = [{
-      key: '1',
-      good: '牛肉饼',
-      count: '5',
-      money: '￥6.80',
-    }, {
-      key: '2',
-      good: '曼玲特色蒸饺',
-      count: '4',
-      money: '￥10.80',
-    }, {
-      key: '3',
-      good: '清火白粥',
-      count: '2',
-      money: '￥6.80',
-    }];
-    
     const Step = Steps.Step;
-    const { Column } = Table;
 
     return (
       <div>
@@ -50,35 +82,47 @@ export default class OrderDetail extends Component {
               title="订单详情"
               style={{ width: '100%' }}
             >
-              <Table dataSource={data} pagination={false}>
-                <Column
-                  title="商品"
-                  dataIndex="good"
-                  key="good"
-                />
-                <Column
-                  title="份数"
-                  dataIndex="count"
-                  key="count"
-                  render={(number) => (
-                    <InputNumber min={1} max={10} defaultValue={number} />
-                  )}
-                />
-                <Column
-                  title="小计(元)"
-                  dataIndex="money"
-                  key="money"
-                />
-              </Table>
+              <Row>
+                <Col span={10}>
+                  商品
+                </Col>
+                <Col span={6}>
+                  份数
+                </Col>
+                <Col span={8}>
+                  小计（元）
+                </Col>
+              </Row>
+              {this.props.cart.cart.map(item => (
+                <Row
+                  key={item.id} 
+                  type="flex"
+                  align="middle"
+                  className="order-item">
+                  <Col className="shop-cartbarket-item-name" span={10}>
+                    {item.menuname}
+                  </Col>
+                  <Col span={6}>
+                    <InputNumber 
+                      min={0}
+                      onChange={(value) => this.onChange(value, item)}
+                      value={item.number}
+                      style={{width: '100%'}}
+                    />
+                  </Col>
+                  <Col style={{textAlign: 'right'}} span={8}>
+                    ￥{item.number * item.menuprice}
+                  </Col>
+                </Row>
+              ))}
               <p className="order-fee-box">
-                {store.storefee}
+                配送费 ￥ {store.storefee}
               </p>
-
               <p className="order-total-fee">
                 <span className="order-total-sign">￥</span>
-                <span className="order-total-number">80.00</span>
+                <span className="order-total-number">{this.props.cart.total + store.storefee}</span>
               </p>
-              <p className="order-total-goods">共2份商品</p>
+              <p className="order-total-goods">共{this.totalNumber()}份商品</p>
             </Card>
           </Col>
           <Col span={16}>
@@ -86,18 +130,27 @@ export default class OrderDetail extends Component {
               title="收货地址"
               style={{ width: '100%' }}
             >
-              <div tabIndex="1" className="address-box">
-                <Icon 
-                  type="environment"
-                  className="address-img"
-                />
-                <div className="address-info">
-                  <span className="address-name">金</span>
-                  <span className="address-name">先生</span>
-                  <span>13888888888</span>
-                  <span className="address">杭州市西湖区XXXXX幢XXX室</span>
+              {this.props.address.addresses.map((address, index) => (
+                <div 
+                  className="address-box" 
+                  key={address.id}
+                  onClick={() => this.selectAddress(index)}
+                  id={'address-box' + index}
+                  style={index === this.state.selectIndex ? this.state.selectStyle : this.state.style}
+                >
+                  <Icon 
+                    type="environment"
+                    className="address-img"
+                  />
+                  <div className="address-info">
+                    <span className="address-name">{address.name}</span>
+                    <span className="address-name">{address.sex}</span>
+                    <span>{address.phone}</span>
+                    <span className="address">{address.place}</span>
+                  </div>
                 </div>
-              </div>
+              ))}
+              
               <button className="check-order" onClick={this.onConfirm}>确认下单</button>
             </Card>
           </Col>

@@ -1,4 +1,3 @@
-// import { ArticleAction } from '../actions'
 import { RECEIVE_ADDRESSES } from '../constants'
 const home = (state = {addresses: []}, action) => {
   switch (action.type) {

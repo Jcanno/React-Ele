@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Popover, Divider, Avatar, Rate, Row, Col, Typography } from 'antd'
-// import store from '@/assets/store.jpg'
 import './StoreItem.less'
 
 export default class StroeItem extends Component {
@@ -55,7 +54,7 @@ export default class StroeItem extends Component {
                 className="store-rate"
               />
               <Text className="store-fee">
-                {store.storefee}
+                配送费 ￥ {store.storefee}
               </Text>
             </Col>
           </Row>

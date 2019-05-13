@@ -1,4 +1,3 @@
-// import { ArticleAction } from '../actions'
 import { REQUEST_LOGIN, RECEIVE_TOKEN, DELETE_TOKEN } from '../constants'
 const login = (state = {}, action) => {
   switch (action.type) {

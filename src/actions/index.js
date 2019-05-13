@@ -9,7 +9,9 @@ import {
   SAVE_STORES,
   GET_STOREDETAIL,
   SAVE_STOREDETAIL,
-  CLEAR_STOREDETAIL
+  CLEAR_STOREDETAIL,
+  SAVE_ORDER,
+  GET_ORDER
 } from '../constants'
 
 
@@ -110,6 +112,25 @@ export const SaveStoreDetailAction = (data) => {
   return {
     type: SAVE_STOREDETAIL,
     payload: data
+  }
+}
+
+/**
+ * 保存订单action
+ */
+export const SaveOrderAction = (data) => {
+  return {
+    type: SAVE_ORDER,
+    payload: data
+  }
+}
+
+/**
+ * 获取订单action
+ */
+export const GetOrdersAction = () => {
+  return {
+    type: GET_ORDER,
   }
 }
 

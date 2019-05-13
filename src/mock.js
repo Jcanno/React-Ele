@@ -29,7 +29,7 @@ const tokens = [
 ]
 
 const storefees = [
-  '免配送费', '配送费 ￥1', '配送费 ￥2', '配送费 ￥3', '配送费 ￥4'
+  0, 1, 2, 3, 4
 ]
 
 const storetimes = [
@@ -114,13 +114,13 @@ Random.extend({
 })
 
 
-function checkToken(token) {
-  if(tokens.some(item => item === token)){
-    return true
-  }else {
-    return false
-  }
-}
+// function checkToken(token) {
+//   if(tokens.some(item => item === token)){
+//     return true
+//   }else {
+//     return false
+//   }
+// }
 
 /**
  * 登录接口
@@ -230,4 +230,25 @@ Mock.mock( `${baseUrl}storeDetail`, () => {
     res.push(obj);
   }
   return res
+})
+
+
+let orders = [];
+let orderid = 0;
+
+/**
+ * 添加订单
+ */
+Mock.mock(`${baseUrl}order`, 'post', (options) => {
+  let order = JSON.parse(options.body);
+  orderid += 1;
+  order.id = orderid;
+  orders.push(order);
+})
+
+/**
+ * 获取订单
+ */
+Mock.mock(`${baseUrl}orders`, () => {
+  return orders;
 })
