@@ -10,8 +10,8 @@ const RouterList = [
     path: '/'
   },
   {
-    component: () => import('../components/Order/Order'),
-    path: '/myorder'
+    component: () => import('../containers/Order'),
+    path: '/order'
   },
   {
     component: () => import('../containers/Login'),

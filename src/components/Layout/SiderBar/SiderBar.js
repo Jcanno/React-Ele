@@ -30,10 +30,10 @@ class SiderBar extends Component {
               </Link>
             </div>           
           </Menu.Item>
-          <Menu.Item key="/myorder">
+          <Menu.Item key="/order">
             <div>
               <Icon type="file-text" className="siderbar-icon"/>
-              <Link to="/myorder">
+              <Link to="/order">
                 我的订单
               </Link>
             </div>  

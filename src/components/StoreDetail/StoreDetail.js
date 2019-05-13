@@ -63,8 +63,6 @@ export default class StoreDetail extends Component {
     this.forceUpdate();
     let top = - this.props.cart.cart.length * 46 - 40;
     this.changeBarketTop(top);
-    console.log(this.props.cart.cart);
-    
   }
 
   goodIsExistIncart(storeDetail) {

@@ -11,11 +11,6 @@ class HeaderDom extends Component {
     const menu = (
       <Menu>
         <Menu.Item>
-          <Link to="/my">
-            个人中心
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
           <Link to="/address">
             我的地址
           </Link>
@@ -24,16 +19,6 @@ class HeaderDom extends Component {
           <span onClick={() => this.props.deleteLogin(() => this.props.history.push('/login'))}>
             退出登录
           </span>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to="/store">
-            商品详情
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to='/orderdetail'>
-            订单详情
-          </Link>
         </Menu.Item>
       </Menu>
     );
@@ -58,7 +43,7 @@ class HeaderDom extends Component {
               </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link to="/myorder">
+              <Link to="/order">
                 我的订单
               </Link>
             </Menu.Item>

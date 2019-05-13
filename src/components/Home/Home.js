@@ -8,8 +8,6 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getStores();
-    console.log(this.props);
-    
   }
 
   goToDetail = (store) => {

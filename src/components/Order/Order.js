@@ -2,40 +2,24 @@ import React, { Component } from 'react'
 import SiderBar from '../Layout/SiderBar/SiderBar'
 import { Card, Table, Avatar } from 'antd'
 import './Order.less'
-import store from '@/assets/store.jpg'
+import moment from 'moment'
 
 export default class Order extends Component {
 
+  componentDidMount() {
+    this.props.getOrders();
+  }
+
+  handleTime = (time) => {
+    let timestamp = Date.parse(time) / 1000;
+    return moment.unix(timestamp).format('YYYY-MM-DD HH:mm:ss');
+  }
 
   render() {
 
     const { Column } = Table;
 
-    const data = [{
-      key: '1',
-      time: 'John',
-      orderinfo: 'Brown',
-      money: 32,
-      state: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-      img: store
-    }, {
-      key: '2',
-      time: 'John',
-      orderinfo: 'Brown',
-      money: 32,
-      state: 'New York No. 1 Lake Park',
-      tags: ['loser'],
-      img: store
-    }, {
-      key: '3',
-      time: 'John',
-      orderinfo: 'Brown',
-      money: 32,
-      state: 'New York No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-      img: store
-    }];
+    const data = this.props.order.orders;
 
     return (
       <div className="order">
@@ -46,12 +30,18 @@ export default class Order extends Component {
         >
           <Table 
             dataSource={data}
-            pagination={false}  
+            pagination={false}
+            rowKey="id"  
           >
             <Column
               title="下单时间"
               dataIndex="time"
               key="time"
+              render={(text) => {
+                return (
+                  <span>{this.handleTime(text)}</span>
+                )               
+              }}
             />
             <Column
               title="订单内容"
@@ -59,23 +49,25 @@ export default class Order extends Component {
               key="orderinfo"
               render={(text, row) => {
                 return (
-                  <div>
-                    <Avatar src={row.img} size={60} className="order-store"/>
-                    <span>{text}</span>
+                  <div className="order-info">
+                    <Avatar src={row.storeimg} size={60} className="order-store"/>
+                    <span className="order-menuname">{row.menuname}</span>
                   </div>
                 )
-                
               }}
             />
             <Column
               title="支付金额"
-              dataIndex="money"
-              key="money"
+              dataIndex="paid"
+              key="paid"
             />
             <Column
               title="状态"
               key="state"
               dataIndex="state"
+              render={() => (
+                <span>订单已完成</span>
+              )}
             />
           </Table>,
         </Card>

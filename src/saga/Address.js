@@ -4,7 +4,6 @@ import { addresses, postaddress, putaddress, deleteaddress } from '@/api'
 
 function* yieldAddresses() {
   const res = yield call(addresses);
-  console.log(res);
   yield put({ type: RECEIVE_ADDRESSES, payload: res });
 }
 

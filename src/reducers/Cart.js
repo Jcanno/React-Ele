@@ -2,7 +2,6 @@ import { SAVE_STOREDETAIL, CLEAR_STOREDETAIL } from '../constants'
 const cart = (state = { cart: [], total: 0 }, action) => {
   switch (action.type) {
     case SAVE_STOREDETAIL:
-    console.log(action.payload);
       if(action.payload.number === 0) {
         state.cart = state.cart.filter(item => action.payload.id !== item.id)
       }else if(state.cart.some(item => item.id === action.payload.id)) {

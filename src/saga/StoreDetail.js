@@ -4,8 +4,6 @@ import { storeDetails } from '@/api'
 
 function* yieldStoreDetail() {
   const res = yield call(storeDetails);
-  console.log(res);
-  
   if(res) {
     yield put({ type: RECEIVE_STOREDETAIL, payload: res });
   }

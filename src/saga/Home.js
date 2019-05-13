@@ -4,8 +4,6 @@ import { stores } from '@/api'
 
 function* yieldStores(action) {
   const res = yield call(stores);
-  console.log(res);
-    // action.onSuccess();
   yield put({ type: RECEIVE_SOTRES, payload: res });
 }
 
